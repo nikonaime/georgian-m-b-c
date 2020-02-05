@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GEORGIA MADE BY CHARACTERS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>ა</kbd>
+      <span class="sound">ანბანი</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>ს</kbd>
+      <span class="sound">საქართველო</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>დ</kbd>
+      <span class="sound">დმანისი</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>ფ</kbd>
+      <span class="sound">ფაჩულია</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>გ</kbd>
+      <span class="sound">გალაკტიონი</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>ჰ</kbd>
+      <span class="sound">ჰეშთეგი</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>ჯ</kbd>
+      <span class="sound">ჯინსები</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>კ</kbd>
+      <span class="sound">კავკასიონი</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>ლ</kbd>
+      <span class="sound">ლელო</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/a.wav"></audio>
+  <audio data-key="83" src="sounds/s.wav"></audio>
+  <audio data-key="68" src="sounds/d.wav"></audio>
+  <audio data-key="70" src="sounds/f.wav"></audio>
+  <audio data-key="71" src="sounds/g.wav"></audio>
+  <audio data-key="72" src="sounds/h.wav"></audio>
+  <audio data-key="74" src="sounds/j.wav"></audio>
+  <audio data-key="75" src="sounds/k.wav"></audio>
+  <audio data-key="76" src="sounds/l.wav"></audio>
+
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
